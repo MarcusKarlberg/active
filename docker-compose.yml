@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  mysql_db:
+    container_name: 'active_db'
+    image: "mysql:8.0"
+    restart: always
+    ports:
+      - "3305:3305"
+    expose:
+      - "3305"
+    environment:
+      MYSQL_TCP_PORT: 3305
+      MYSQL_DATABASE: active_db
+      MYSQL_USER: active
+      MYSQL_PASSWORD: password123
+      MYSQL_ROOT_PASSWORD: password123
