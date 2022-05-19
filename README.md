@@ -1,6 +1,6 @@
-# active
+## active
 
-REST API to create Providers and Users, Venues and connected Events.
+# REST API to create Providers and Users, Venues and connected Events.
 
 Run on local host:
 1. Run docker-compose file to start local MySQL db.
