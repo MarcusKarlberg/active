@@ -1,5 +1,6 @@
 package se.mk.active.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import se.mk.active.model.ProviderDto;
 import se.mk.active.service.ProviderService;
 
 @RestController
+@Tag(name = "Provider/Municipality Endpoint")
 @RequestMapping("/api/v1/providers")
 public class ProviderController {
     private ProviderService providerService;
