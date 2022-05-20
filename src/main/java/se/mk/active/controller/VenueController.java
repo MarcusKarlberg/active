@@ -7,11 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import se.mk.active.model.Venue;
 import se.mk.active.model.VenueDto;
 import se.mk.active.service.VenueService;
 
 import javax.validation.Valid;
+import java.io.File;
 
 @RestController
 @RequestMapping("/api/v1/venues")
