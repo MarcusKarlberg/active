@@ -18,8 +18,7 @@ import java.nio.charset.StandardCharsets;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -72,6 +71,13 @@ class EventControllerTest {
                         .characterEncoding(StandardCharsets.UTF_8))
                 .andDo(print())
                 .andExpect(jsonPath("$.name").value(EventData.NAME))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void deleteEventSuccessTest() throws Exception {
+        mockMvc.perform(delete(URL_EVENTS.concat("/1")))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 }

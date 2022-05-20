@@ -48,4 +48,9 @@ public final class UserServiceImpl implements UserService {
             throw new ResourceNotFoundException(createErrorMsgAndLog(USER_NOT_FOUND, id, LOG));
         }
     }
+
+    @Override
+    public void deleteById(Long id) {
+        this.userRepository.deleteById(id);
+    }
 }

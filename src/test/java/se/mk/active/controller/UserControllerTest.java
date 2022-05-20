@@ -19,8 +19,7 @@ import java.nio.charset.StandardCharsets;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -77,6 +76,13 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.username").value(UserData.USERNAME))
                 .andExpect(jsonPath("$.password").value(UserData.PASSWORD))
                 .andExpect(jsonPath("$.role").value(UserData.ROLE.name()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void deleteUserSuccessTest() throws Exception {
+        mockMvc.perform(delete(URL_USERS.concat("/1")))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 }
