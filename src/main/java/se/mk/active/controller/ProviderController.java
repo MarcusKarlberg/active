@@ -11,6 +11,8 @@ import se.mk.active.model.Provider;
 import se.mk.active.model.ProviderDto;
 import se.mk.active.service.ProviderService;
 
+import javax.validation.Valid;
+
 @RestController
 @Tag(name = "Provider/Municipality Endpoint")
 @RequestMapping("/api/v1/providers")
@@ -23,7 +25,7 @@ public class ProviderController {
     }
 
     @PostMapping
-    public ResponseEntity<Provider> createProvider(@RequestBody ProviderDto providerDTO) {
+    public ResponseEntity<Provider> createProvider(@Valid @RequestBody ProviderDto providerDTO) {
         final Provider provider = providerDTO.toProvider();
         return new ResponseEntity<>(providerService.createProvider(provider), HttpStatus.CREATED);
     }

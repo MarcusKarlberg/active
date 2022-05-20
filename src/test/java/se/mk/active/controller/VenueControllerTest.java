@@ -10,6 +10,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import se.mk.active.model.Venue;
+import se.mk.active.model.VenueDto;
+import se.mk.active.sampledata.ProviderData;
 import se.mk.active.sampledata.VenueData;
 import se.mk.active.service.VenueService;
 
@@ -44,12 +46,13 @@ class VenueControllerTest {
         assertThat(mockMvc).isNotNull();
         assertThat(venueService).isNotNull();
         this.venue = VenueData.createVenue();
+        this.venue.setProvider(ProviderData.createProvider());
     }
 
     @Test
     void createVenueSuccessTest() throws Exception {
         when(venueService.createVenue(any(), any())).thenReturn(this.venue);
-        String json = mapper.writeValueAsString(this.venue);
+        String json = mapper.writeValueAsString(VenueDto.toDto(this.venue));
 
         mockMvc.perform(post(VENUE_API_URL)
                 .contentType(MediaType.APPLICATION_JSON)
