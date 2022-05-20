@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 @NoArgsConstructor
@@ -14,7 +15,7 @@ import java.util.Collection;
 @Builder
 @Entity
 @Table(name = "venues")
-public final class Venue {
+public final class Venue implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
