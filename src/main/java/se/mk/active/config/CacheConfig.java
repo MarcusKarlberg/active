@@ -6,14 +6,23 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ProviderCacheConfig {
+public class CacheConfig {
 
     @Bean
-    public Config cacheConfig() {
+    public Config providerCacheConfig() {
         return new Config()
                 .setInstanceName("hazel-instance")
                 .addMapConfig(new MapConfig()
                         .setName("provider-cache")
+                        .setTimeToLiveSeconds(6000));
+    }
+
+    @Bean
+    public Config venueCacheConfig() {
+        return new Config()
+                .setInstanceName("hazel-instance")
+                .addMapConfig(new MapConfig()
+                        .setName("venue-cache")
                         .setTimeToLiveSeconds(6000));
     }
 }
