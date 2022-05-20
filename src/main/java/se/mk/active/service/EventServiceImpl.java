@@ -54,4 +54,9 @@ public final class EventServiceImpl implements EventService {
             throw new ResourceNotFoundException(createErrorMsgAndLog(EVENT_NOT_FOUND, id, LOG));
         }
     }
+
+    @Override
+    public void deleteById(Long id) {
+        this.eventRepository.deleteById(id);
+    }
 }

@@ -28,6 +28,6 @@ public final class Venue implements Serializable {
     private Provider provider;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "venue")
+    @OneToMany(mappedBy = "venue", cascade = CascadeType.ALL)
     private Collection<Event> events;
 }

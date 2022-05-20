@@ -5,12 +5,29 @@ jobs: # a collection of steps
     working_directory: ~/circleci-demo-java-spring # directory where steps will run
 
     docker: # run the steps with Docker
-      - image: circleci/openjdk:11-stretch # ...with this image as the primary container; this is where all `steps` will run
+      - image: circleci/openjdk:11
+        environment:
+          DB_ROOT_USER: root
+          DB_URL: jdbc:mysql://127.0.0.1:3305/active_db
+          DB_DRIVER: com.mysql.cj.jdbc.Driver
+          DB_PASS: 'active_db'
+
+      # Speficy your version of MYSQL
+      - image: circleci/mysql:8.0-ram
+        environment:
+          MYSQL_TCP_PORT: 3305
+          MYSQL_DATABASE: active_db
+          MYSQL_USER: active
+          MYSQL_PASSWORD: password123
+          MYSQL_ROOT_PASSWORD: password123
 
     steps: # a collection of executable commands
 
       - checkout # check out source code to working directory
-
+      - run:
+          name: Wait for Database Connection
+          # preinstalled in circleci/* docker image
+          command: dockerize -wait tcp://localhost:3305 -timeout 1m
       - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}

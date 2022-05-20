@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.mk.active.model.Event;
 import se.mk.active.model.EventDto;
+import se.mk.active.model.Venue;
 import se.mk.active.service.EventService;
 
 @RestController
@@ -28,5 +29,11 @@ public final class EventController {
     @GetMapping("/{id}")
     public ResponseEntity<Event> getEventById(@PathVariable Long id) {
         return new ResponseEntity<>(eventService.getEventById(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Venue> deleteEventById(@PathVariable Long id) {
+        eventService.deleteById(id);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }
