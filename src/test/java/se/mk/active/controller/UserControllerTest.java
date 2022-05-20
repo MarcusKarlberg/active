@@ -11,6 +11,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import se.mk.active.model.User;
+import se.mk.active.model.UserDto;
+import se.mk.active.sampledata.ProviderData;
 import se.mk.active.sampledata.UserData;
 import se.mk.active.service.UserService;
 
@@ -45,12 +47,13 @@ class UserControllerTest {
         assertThat(mockMvc).isNotNull();
         assertThat(userService).isNotNull();
         basicUser = UserData.createUser();
+        basicUser.setProvider(ProviderData.createProvider());
     }
 
     @Test
     public void createUserTestSuccess() throws Exception {
         when(userService.createUser(ArgumentMatchers.any(), ArgumentMatchers.any())).thenReturn(this.basicUser);
-        String json = mapper.writeValueAsString(this.basicUser);
+        String json = mapper.writeValueAsString(UserDto.toDto(this.basicUser));
 
         mockMvc.perform(post(URL_USERS)
             .contentType(MediaType.APPLICATION_JSON)

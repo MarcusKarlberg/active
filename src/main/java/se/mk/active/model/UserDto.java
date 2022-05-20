@@ -20,10 +20,10 @@ public final class UserDto implements Serializable {
     @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
 
-    @NotNull
+    @NotNull(message = "Role cannot be null")
     private Role role;
 
-    @NotNull
+    @NotNull(message = "Provider ID cannot be null")
     private Long providerId;
 
     public User toUser() {
@@ -31,6 +31,15 @@ public final class UserDto implements Serializable {
                 .username(username)
                 .password(password)
                 .role(role)
+                .build();
+    }
+
+    public static UserDto toDto(User user) {
+        return UserDto.builder()
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .role(user.getRole())
+                .providerId(user.getProvider().getId())
                 .build();
     }
 }

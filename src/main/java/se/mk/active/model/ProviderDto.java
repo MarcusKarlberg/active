@@ -2,7 +2,7 @@ package se.mk.active.model;
 
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @EqualsAndHashCode
 public final class ProviderDto {
-    @NotNull
+    @NotBlank(message = "Provider name can not be empty")
     private String name;
     private ContactInfo contactInfo;
 

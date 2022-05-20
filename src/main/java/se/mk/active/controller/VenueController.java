@@ -11,6 +11,8 @@ import se.mk.active.model.Venue;
 import se.mk.active.model.VenueDto;
 import se.mk.active.service.VenueService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/venues")
 public class VenueController {
@@ -23,7 +25,7 @@ public class VenueController {
     }
 
     @PostMapping
-    public ResponseEntity<Venue> createVenue(@RequestBody VenueDto venueDto) {
+    public ResponseEntity<Venue> createVenue(@Valid @RequestBody VenueDto venueDto) {
         final Venue venue = venueDto.toVenue();
         return new ResponseEntity<>(venueService.createVenue(venue, venueDto.getProviderId()), HttpStatus.CREATED);
     }

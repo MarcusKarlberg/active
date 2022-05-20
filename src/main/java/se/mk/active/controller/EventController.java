@@ -9,6 +9,8 @@ import se.mk.active.model.EventDto;
 import se.mk.active.model.Venue;
 import se.mk.active.service.EventService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/events")
 public final class EventController {
@@ -27,7 +29,7 @@ public final class EventController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Event> getEventById(@PathVariable Long id) {
+    public ResponseEntity<Event> getEventById(@Valid @PathVariable Long id) {
         return new ResponseEntity<>(eventService.getEventById(id), HttpStatus.OK);
     }
 
