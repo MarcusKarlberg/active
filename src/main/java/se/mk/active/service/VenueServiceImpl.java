@@ -50,4 +50,9 @@ public final class VenueServiceImpl implements VenueService {
             throw new ResourceNotFoundException(createErrorMsgAndLog(VENUE_NOT_FOUND, id, LOG));
         }
     }
+
+    @Override
+    public void deleteById(Long id) {
+        this.venueRepository.deleteById(id);
+    }
 }

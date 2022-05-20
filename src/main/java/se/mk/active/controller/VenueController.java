@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.function.EntityResponse;
 import se.mk.active.model.Venue;
 import se.mk.active.model.VenueDto;
 import se.mk.active.service.VenueService;
@@ -29,5 +28,11 @@ public final class VenueController {
     @GetMapping("/{id}")
     public ResponseEntity<Venue> getVenueById(@PathVariable Long id) {
         return new ResponseEntity<>(venueService.getVenueById(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Venue> deleteVenueById(@PathVariable Long id) {
+        venueService.deleteById(id);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }

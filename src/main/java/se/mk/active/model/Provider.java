@@ -32,7 +32,7 @@ public final class Provider implements Serializable {
     private Collection<User> users;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Collection<Venue> venues;
 
 }

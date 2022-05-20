@@ -27,6 +27,6 @@ public final class Venue {
     private Provider provider;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "venue")
+    @OneToMany(mappedBy = "venue", cascade = CascadeType.ALL)
     private Collection<Event> events;
 }
