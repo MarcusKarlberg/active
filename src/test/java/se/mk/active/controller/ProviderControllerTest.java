@@ -8,9 +8,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import se.mk.active.model.Provider;
 import se.mk.active.sampledata.ProviderData;
+import se.mk.active.security.JwtBuilderParserImpl;
+import se.mk.active.security.SecurityConstants;
 import se.mk.active.service.ProviderService;
 
 import java.nio.charset.StandardCharsets;
@@ -26,6 +30,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(value = ProviderController.class)
 @AutoConfigureMockMvc(addFilters = false)
 class ProviderControllerTest {
+
+    //MockBeans for Spring Security
+    @MockBean
+    private JwtBuilderParserImpl jwtBuilderParser;
+
+    @MockBean
+    private SecurityConstants securityConstants;
+
+    @MockBean
+    private UserDetailsService userDetailsService;
+
+    @MockBean
+    private BCryptPasswordEncoder encoder;
     private static final String URL_PROVIDERS = "/api/v1/providers";
     private static ObjectMapper mapper = new ObjectMapper();
     @MockBean

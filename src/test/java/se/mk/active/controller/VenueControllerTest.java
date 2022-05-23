@@ -8,11 +8,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import se.mk.active.model.Venue;
 import se.mk.active.model.VenueDto;
 import se.mk.active.sampledata.ProviderData;
 import se.mk.active.sampledata.VenueData;
+import se.mk.active.security.JwtBuilderParserImpl;
+import se.mk.active.security.SecurityConstants;
 import se.mk.active.service.VenueService;
 
 import java.nio.charset.StandardCharsets;
@@ -28,6 +32,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(value = VenueController.class)
 @AutoConfigureMockMvc(addFilters = false)
 class VenueControllerTest {
+
+    //MockBeans for Spring Security
+    @MockBean
+    private JwtBuilderParserImpl jwtBuilderParser;
+
+    @MockBean
+    private SecurityConstants securityConstants;
+
+    @MockBean
+    private UserDetailsService userDetailsService;
+
+    @MockBean
+    private BCryptPasswordEncoder encoder;
 
     private static final String VENUE_API_URL = "/api/v1/venues";
 
