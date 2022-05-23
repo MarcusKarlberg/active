@@ -8,9 +8,16 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import se.mk.active.model.Event;
 import se.mk.active.sampledata.EventData;
+import se.mk.active.security.JwtBuilderParser;
+import se.mk.active.security.JwtBuilderParserImpl;
+import se.mk.active.security.SecurityConstants;
 import se.mk.active.service.EventService;
 
 import java.nio.charset.StandardCharsets;
@@ -18,6 +25,8 @@ import java.nio.charset.StandardCharsets;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -26,6 +35,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(value = EventController.class)
 @AutoConfigureMockMvc(addFilters = false)
 class EventControllerTest {
+
+    //MockBeans for Spring Security
+    @MockBean
+    private JwtBuilderParserImpl jwtBuilderParser;
+
+    @MockBean
+    private SecurityConstants securityConstants;
+
+    @MockBean
+    private UserDetailsService userDetailsService;
+
+    @MockBean
+    private  BCryptPasswordEncoder encoder;
 
     private static final String URL_EVENTS = "/api/v1/events";
 

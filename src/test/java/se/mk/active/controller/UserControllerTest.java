@@ -9,11 +9,16 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import se.mk.active.model.User;
 import se.mk.active.model.UserDto;
 import se.mk.active.sampledata.ProviderData;
 import se.mk.active.sampledata.UserData;
+import se.mk.active.security.JwtBuilderParserImpl;
+import se.mk.active.security.SecurityConstants;
 import se.mk.active.service.UserService;
 
 import java.nio.charset.StandardCharsets;
@@ -28,7 +33,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(value = UserController.class)
 @AutoConfigureMockMvc(addFilters = false)
+@WithMockUser(username = "admin", password="password123", roles="ADMIN")
 class UserControllerTest {
+
+    //MockBeans for Spring Security
+    @MockBean
+    private JwtBuilderParserImpl jwtBuilderParser;
+
+    @MockBean
+    private SecurityConstants securityConstants;
+
+    @MockBean
+    private UserDetailsService userDetailsService;
+
+    @MockBean
+    private BCryptPasswordEncoder encoder;
 
     private static final String URL_USERS = "/api/v1/users";
 

@@ -37,4 +37,9 @@ public final class ProviderServiceImpl implements ProviderService {
             throw new ResourceNotFoundException(createErrorMsgAndLog(PROVIDER_NOT_FOUND, id, LOG));
         }
     }
+
+    @Override
+    public Optional<Provider> getProviderByName(String name) {
+        return this.providerRepository.findByName(name);
+    }
 }
