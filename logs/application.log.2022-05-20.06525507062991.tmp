@@ -1,7 +1,0 @@
-2022-05-21 00:06:44.663  INFO 11864 --- [main] s.m.a.controller.FileControllerTest      : Starting FileControllerTest using Java 17.0.2 on linux-laptop with PID 11864 (started by marcus in /home/marcus/dev/ideaProjects/active)
-2022-05-21 00:06:44.667  INFO 11864 --- [main] s.m.a.controller.FileControllerTest      : The following 1 profile is active: "dev"
-2022-05-21 00:06:46.155  INFO 11864 --- [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2022-05-21 00:06:46.155  INFO 11864 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2022-05-21 00:06:46.156  INFO 11864 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2022-05-21 00:06:46.178  INFO 11864 --- [main] s.m.a.controller.FileControllerTest      : Started FileControllerTest in 1.795 seconds (JVM running for 2.472)
-2022-05-21 00:06:46.260  WARN 11864 --- [main] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.multipart.support.MissingServletRequestPartException: Required request part 'file' is not present]
